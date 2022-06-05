@@ -109,7 +109,7 @@ class PasswordGenerator():
 
         # container 
         container=Frame(app,bg="#1b1c1c")
-        container.place(width=1000,height=600)
+        container.place(width=600,height=600)
         tittle_app = Label(container,text="PASSWORD GENERATOR", font="Arial 20 bold", fg="#fff", bg="#1b1c1c")
         tittle_app.place(width=600,height=50)
 
@@ -117,18 +117,21 @@ class PasswordGenerator():
         body=Frame(app,borderwidth=1,relief='solid')
         body.place(width=580,height=530,y=50,x=10)
 
-        type_multiple= Radiobutton(body,text="Multiple passwords",font="Arial 12 bold",value="multiple",variable=option)
-        type_multiple.place(x=275,y=20)
-        type_single= Radiobutton(body,text="One password",font="Arial 12 bold",value="single",variable=option)
-        type_single.place(x=135,y=20)
+        container_main=Frame(body,borderwidth=1,relief='solid')
+        container_main.place(width=440,height=350,x=75)
 
-        label_lenght = Label(body,text="LENGHT:",width=10,font='Arial 12 bold')
-        label_lenght.place(x=80,y=58)
-        lenght_password = Entry(body,font="Arial 12",width=25)
-        lenght_password.place(x=175,y=60)
+        type_multiple= Radiobutton(container_main,text="Multiple passwords",font="Arial 12 bold",value="multiple",variable=option)
+        type_multiple.place(x=200,y=20)
+        type_single= Radiobutton(container_main,text="One password",font="Arial 12 bold",value="single",variable=option)
+        type_single.place(x=50,y=20)
 
-        bt_generate = Button(body, bd=0,text="Generate",borderwidth=1,relief='solid', command=lambda:[validate(get_lenght())]) 
-        bt_generate.place(width=200, height=50, x=190, y=90)
+        label_lenght = Label(container_main,text="LENGHT:",width=10,font='Arial 12 bold')
+        label_lenght.place(x=40,y=58)
+        lenght_password = Entry(container_main,font="Arial 12",width=22)
+        lenght_password.place(x=135,y=60)
+
+        bt_generate = Button(container_main, bd=0,text="Generate",borderwidth=1,relief='solid', command=lambda:[validate(get_lenght())]) 
+        bt_generate.place(width=202, height=25, x=135, y=115)
         
         # Output das senhas geradas
         output=Frame(body,borderwidth=1,relief='solid')
