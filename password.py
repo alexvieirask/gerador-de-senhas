@@ -1,6 +1,7 @@
 import random
 from tkinter import *
 from tkinter import messagebox
+from random import randint
 
 # Classe para representar o Password Generator
 class PasswordGenerator(): 
@@ -22,11 +23,35 @@ class PasswordGenerator():
             self.password = password
         else:
             self.password_multiple = []
-            for i in range (10):
+            for password in range (10):
                 password = ''.join(random.sample(allCharacters,lenght_password))
                 self.password_multiple.append(password)
-                
     
+    def save_txt(self):
+        name_archive = 'Password - ' + str(randint(0,1000)) 
+        if len(self.password_multiple) != 0:
+            name_archive = name_archive + ".txt"
+            archive = open(name_archive, "x")
+            archive.close()
+            archive = open(name_archive, "w")
+            for password in self.password_multiple:
+                archive.write("- "+password+"\n")
+            archive.close()
+        else:
+            self.messageShow('save_error')
+
+
+            # Definindo mensagens da situação da requisição
+    def messageShow(self,type):
+        if type == 'sucess':
+            messagebox.showinfo(title="Success",message="Your password has been generated!")
+        if type == 'warning':
+            messagebox.showwarning(title="Warning",message="Max Leght is 50 characters! Minimum is 8 characters!")
+        if type == 'error':
+            messagebox.showerror(title="Error",message="Invalid Lenght, try again!")
+        if type == 'save_error':
+            messagebox.showerror(title="Error",message="Save error, Try again")
+
     # Função da página  inicial
     def window(self):
         app = Tk()
@@ -53,38 +78,28 @@ class PasswordGenerator():
         def copy_single():
             app.clipboard_clear()
             app.clipboard_append(self.password)
-        
-        def save_txt():
-            pass
+ 
 
-        # Definindo mensagens da situação da requisição
-        def messageShow(type):
-            if type == 'sucess':
-                messagebox.showinfo(title="Success",message="Your password has been generated!")
-            if type == 'warning':
-                messagebox.showwarning(title="Warning",message="Max Leght is 50 characters! Minimum is 8 characters!")
-            if type == 'error':
-                messagebox.showerror(title="Error",message="Invalid Lenght, try again!")
 
         # Validação do tamanho e tipo da variavel lenght
         def validate(lenght):
             try:
                 lenght = int(lenght)
                 if lenght == 0 or lenght<0:
-                    messageShow('error')
+                    self.messageShow('error')
                 elif lenght > 50:
-                    messageShow('warning')
+                    self.messageShow('warning')
                 elif lenght < 8:
-                    messageShow('warning')
+                    self.messageShow('warning')
                 else:
                     self.generate_password(get_lenght(),get_option())
                     return_multiple_password()
                     return_password()
-                    messageShow('sucess')
+                    self.messageShow('sucess')
 
 
             except ValueError:
-                messageShow('error')
+                self.messageShow('error')
                 return -1
         
         password_one = StringVar()
@@ -154,7 +169,7 @@ class PasswordGenerator():
         bt_copy = Button(body, bd=0,text="copy",borderwidth=1,relief='solid', command=copy_single) 
         bt_copy.place(width=50, height=20, x=450, y=205)
 
-        bt_save = Button(body, bd=0,text="save text file",borderwidth=1,relief='solid', command=save_txt) 
+        bt_save = Button(body, bd=0,text="save text file",borderwidth=1,relief='solid', command=self.save_txt) 
         bt_save.place(width=100, height=20, x=400, y=470)
         
         # Inicialização da página
