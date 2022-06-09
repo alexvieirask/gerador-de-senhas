@@ -10,21 +10,21 @@ class PasswordGenerator():
         self.password_multiple= []
     
     # Função que vai gerar uma senha
-    def generate_password(self,lenght_password,option)->None:
+    def generate_password(self,length_password,option)->None:
         # Caracteres possiveis
         uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         lowercaseLetters = uppercaseLetters.lower()
         numbers = '0123456789'
         symbols = '[]}{/*-~ç´;?'
         allCharacters = uppercaseLetters + lowercaseLetters + numbers + symbols
-        lenght_password = int(lenght_password)
+        length_password = int(length_password)
         if option == "single":
-            password = ''.join(random.sample(allCharacters,lenght_password))
+            password = ''.join(random.sample(allCharacters,length_password))
             self.password = password
         else:
             self.password_multiple = []
             for password in range (10):
-                password = ''.join(random.sample(allCharacters,lenght_password))
+                password = ''.join(random.sample(allCharacters,length_password))
                 self.password_multiple.append(password)
     
     def save_txt(self):
@@ -58,8 +58,8 @@ class PasswordGenerator():
         app.title("Password Generator")
 
         # Funções Get
-        def get_lenght()-> StringVar:
-            return lenght_password.get()
+        def get_length()-> StringVar:
+            return length_password.get()
                  
         def get_option()-> StringVar:
             return option.get()
@@ -81,18 +81,18 @@ class PasswordGenerator():
  
 
 
-        # Validação do tamanho e tipo da variavel lenght
-        def validate(lenght):
+        # Validação do tamanho e tipo da variavel length
+        def validate(length):
             try:
-                lenght = int(lenght)
-                if lenght == 0 or lenght<0:
+                length = int(length)
+                if length == 0 or length<0:
                     self.messageShow('error')
-                elif lenght > 50:
+                elif length > 50:
                     self.messageShow('warning')
-                elif lenght < 8:
+                elif length < 8:
                     self.messageShow('warning')
                 else:
-                    self.generate_password(get_lenght(),get_option())
+                    self.generate_password(get_length(),get_option())
                     return_multiple_password()
                     return_password()
                     self.messageShow('sucess')
@@ -140,12 +140,12 @@ class PasswordGenerator():
         type_single= Radiobutton(container_main,text="One password",font="Arial 12 bold",value="single",variable=option)
         type_single.place(x=50,y=20)
 
-        label_lenght = Label(container_main,text="LENGHT:",width=10,font='Arial 12 bold')
-        label_lenght.place(x=40,y=58)
-        lenght_password = Entry(container_main,font="Arial 12",width=22)
-        lenght_password.place(x=135,y=60)
+        label_length = Label(container_main,text="LENGTH:",width=10,font='Arial 12 bold')
+        label_length.place(x=40,y=58)
+        length_password = Entry(container_main,font="Arial 12",width=22)
+        length_password.place(x=135,y=60)
 
-        bt_generate = Button(container_main, bd=0,text="Generate",borderwidth=1,relief='solid', command=lambda:[validate(get_lenght())]) 
+        bt_generate = Button(container_main, bd=0,text="Generate",borderwidth=1,relief='solid', command=lambda:[validate(get_length())]) 
         bt_generate.place(width=202, height=25, x=135, y=115)
         
         # Output das senhas geradas
