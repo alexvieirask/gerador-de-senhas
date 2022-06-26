@@ -1,7 +1,7 @@
 # TkinterPython-PasswordGenerator
 
-## How to use
-To use this project, just download and run the main file.
+## Como usar
+Para usar este projeto, basta baixar e executar o arquivo "main".
 ## Screens
 <div align="center">
   <img src="https://i.ibb.co/D1ZZBGp/interface01.png">
