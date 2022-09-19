@@ -1,4 +1,4 @@
-# TkinterPython-PasswordGenerator
+# Simple Password Generator
 
 ## Como usar
 Para usar este projeto, basta baixar e executar o arquivo "main".
