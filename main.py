@@ -1,6 +1,5 @@
 import random
 from tkinter import *
-from tkinter import messagebox
 from random import randint
 
 # Classe para representar o Password Generator
